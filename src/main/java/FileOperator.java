@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * **********************************************************
@@ -11,27 +12,21 @@ import java.util.ArrayList;
  */
 public class FileOperator {
 
-    public static ArrayList<Integer> getInputNumbersFromFile(String pathToFile) {
-        ArrayList<Integer> listOfNumbers = new ArrayList<>();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(pathToFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String line;
-        try {
+    public static List<Integer> getInputNumbersFromFile(String pathToFile) throws IOException {
+        List<Integer> listOfNumbers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(pathToFile))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 listOfNumbers.add(Integer.valueOf(line));
             }
-        } catch (IOException e) {
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return listOfNumbers;
     }
 
-    public static void writeFile(String path, ArrayList<Integer> listOfResults) {
-
+    public static void writeFile(String path, List<Integer> listOfResults) {
         int size = listOfResults.size();
         int counter = 1;
         // Only in Java 1.7 or higher, FileWriter implements Closeable....

@@ -10,9 +10,7 @@ public class MathCalculation {
 
     public static int calculateWay(int number) {
         // Exceptional cases
-        if (number == 0 || number == 1) {
-            return 1;
-        } else if (number < 0) {
+        if (number < 0) {
             throw new ArithmeticException("Sorry, this operation is possible only for positive numbers. Check the input file please.");
         }
         int startPartOfSum = 0;
